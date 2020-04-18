@@ -12,6 +12,6 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    install_requires=["scikit-image"],
+    install_requires=["scikit-image", "opencv-python==4.2.0.34", "numpy"],
     python_requires=">=3.6",
 )
