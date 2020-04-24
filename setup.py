@@ -3,6 +3,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("requirements.txt") as r:
+    requirements = r.readlines()
+
 setuptools.setup(
     name="ytp-effects",  # Replace with your own username
     version="0.0.1",
@@ -12,6 +15,6 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    install_requires=["scikit-image", "opencv-python==4.2.0.34", "numpy"],
+    install_requires=[requirements],
     python_requires=">=3.6",
 )
