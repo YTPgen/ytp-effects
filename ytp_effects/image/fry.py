@@ -20,8 +20,10 @@ def overlay_eye(image: numpy.ndarray, center: tuple, size: float) -> numpy.ndarr
         image (numpy.ndarray): Image
         center (tuple): Center of eye effect (x,y)
     """
+    # Resize nani eyes to fit face size
     nani_eye = cv2.resize(_nani_eye, (size, size))
     effect_h, effect_w, channels = nani_eye.shape
+    # Detect the corners of the effect without going out of bounds
     y1, y2 = (
         max(0, center[1] - effect_h // 2),
         min(image.shape[0], center[1] + effect_h - effect_h // 2),
@@ -30,17 +32,23 @@ def overlay_eye(image: numpy.ndarray, center: tuple, size: float) -> numpy.ndarr
         max(0, center[0] - effect_w // 2),
         min(image.shape[1], center[0] + effect_w - effect_w // 2),
     )
+    # If we have gone out of bounds, calculate how much of the nani eyes to cut out
     nani_y1, nani_x1 = (
         max(0, -(center[1] - effect_h // 2)),
         max(0, -(center[0] - effect_w // 2)),
     )
-    nani_alpha = nani_eye[nani_y1:, nani_x1:, 3] / 255.0
+    nani_y2, nani_x2 = (y2 - y1 + nani_y1, x2 - x1 + nani_x1)
+    # Get the alpha channels to make effect transparent
+    nani_alpha = nani_eye[nani_y1:nani_y2, nani_x1:nani_x2, 3] / 255.0
     original_alpha = 1.0 - nani_alpha
-    for c in range(0, 3):
-        image[y1:y2, x1:x2, c] = (
-            nani_alpha * nani_eye[nani_y1:, nani_x1:, c]
-            + original_alpha * image[y1:y2, x1:x2, c]
-        )
+    try:
+        for c in range(0, 3):
+            image[y1:y2, x1:x2, c] = (
+                nani_alpha * nani_eye[nani_y1:nani_y2, nani_x1:nani_x2, c]
+                + original_alpha * image[y1:y2, x1:x2, c]
+            )
+    except ValueError as e:
+        print(e)
     return image
 
 
