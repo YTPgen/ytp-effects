@@ -32,10 +32,14 @@ def bulge(image: np.ndarray, strength: float, center: tuple = None) -> np.ndarra
 
     for y in range(len(image)):
         v = y - center_height
-        if v > max_radius:
+        if abs(v) > max_radius:
             continue
-        x_start = math.floor(-math.sqrt(max_radius ** 2 - v ** 2) + center_width)
-        x_end = math.ceil(math.sqrt(max_radius ** 2 - v ** 2) + center_width)
+        x_start = max(
+            0, math.floor(-math.sqrt(max_radius ** 2 - v ** 2) + center_width)
+        )
+        x_end = min(
+            width, math.ceil(math.sqrt(max_radius ** 2 - v ** 2) + center_width)
+        )
         for x in range(x_start, x_end):
             u = x - center_width
             r = math.sqrt(u ** 2 + v ** 2)
