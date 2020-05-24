@@ -3,3 +3,4 @@ opencv-python==4.2.0.34
 scikit-image==0.16.2
 numpy==1.18.2
 importlib-resources==1.4.0
+moviepy==1.0.2
