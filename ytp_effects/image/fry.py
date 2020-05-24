@@ -53,7 +53,7 @@ def overlay_eye(image: numpy.ndarray, center: tuple, size: float) -> numpy.ndarr
 
 
 def deep_fry(image: numpy.ndarray, faces: list):
-    image = fry(image, color=(0, 0, 255))
+    image = fry(image, color=(255, 0, 0))
     for f in faces:
         left_eye_pos = f.center_of(f.left_eye)
         right_eye_pos = f.center_of(f.right_eye)
@@ -83,7 +83,7 @@ def fry(image: numpy.ndarray, color: tuple = (5, 5, 200), color_strength: float 
     image = cv2.resize(image, (width, height), interpolation=cv2.INTER_LANCZOS4)
 
     # Add some sharp salt
-    kernel = numpy.array([[-1, -1, -1], [-1, 14, -1], [-1, -1, -1]])
+    kernel = numpy.array([[-1, -1, -1], [-1, 11, -1], [-1, -1, -1]])
     image = cv2.filter2D(image, -1, kernel)
     return image
 

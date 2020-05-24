@@ -7,7 +7,9 @@ import math
 def swirl(
     image: np.ndarray, center: np.ndarray = None, strength: float = 1, radius=100
 ):
-    return skimage.transform.swirl(image, center, strength=strength, radius=radius)
+    return (
+        skimage.transform.swirl(image, center, strength=strength, radius=radius) * 255
+    )
 
 
 def bulge(image: np.ndarray, strength: float, center: tuple = None) -> np.ndarray:
