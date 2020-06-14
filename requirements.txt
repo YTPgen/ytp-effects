@@ -3,4 +3,9 @@ opencv-python==4.2.0.34
 scikit-image==0.16.2
 numpy==1.18.2
 importlib-resources==1.4.0
-moviepy==1.0.2
+moviepy==1.0.3
+librosa
+numba==0.43.0 
+llvmlite==0.32.1 
+
+git+https://github.com/YTPgen/face-feature-recognizer.git
