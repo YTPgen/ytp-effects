@@ -7,5 +7,4 @@ moviepy==1.0.3
 librosa
 numba==0.43.0 
 llvmlite==0.32.1 
-
-git+https://github.com/YTPgen/face-feature-recognizer.git
+face_feature_recognizer @ git+https://github.com/YTPgen/face-feature-recognizer

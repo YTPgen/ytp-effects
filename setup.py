@@ -16,5 +16,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
     install_requires=[requirements],
+    dependency_links=[
+        "https://github.com/YTPgen/face-feature-recognizer/tarball/master#egg=face_feature_recognizer-0.0.1"
+    ],
     python_requires=">=3.6",
 )
